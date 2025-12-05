@@ -9,6 +9,8 @@ set_default_color_theme("theme.json")
 auth_win = AuthWindow()
 auth_win.mainloop()
 name = auth_win.name
+host = auth_win.host
+port = auth_win.port
 
 
 class MainWindow(CTk):
@@ -41,7 +43,7 @@ class MainWindow(CTk):
     def connect(self):
         try:
             self.sock = socket(AF_INET, SOCK_STREAM)
-            self.sock.connect(("localhost", 8080))
+            self.sock.connect((host, int(port)))
             self.sock.send(self.username.encode())
             threading.Thread(target=self.recv_message,
                              daemon=True).start()
