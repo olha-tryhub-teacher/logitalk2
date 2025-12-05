@@ -9,6 +9,8 @@ class AuthWindow(CTk):
         self.title("Вхід")
         self.resizable(True, False)
         self.name = ""
+        self.host = ""
+        self.port = ""
 
         # --- ліва частина --
         self.left_frame = CTkFrame(self)
@@ -28,10 +30,21 @@ class AuthWindow(CTk):
 
         self.name_entry = CTkEntry(self.right_frame, placeholder_text="☻ ім`я")
         self.name_entry.pack(fill="x", padx=10, pady=10)
+        self.host_entry = CTkEntry(self.right_frame, placeholder_text="хост")
+        self.host_entry.pack(fill="x", padx=10, pady=10)
+        self.port_entry = CTkEntry(self.right_frame, placeholder_text="порт")
+        self.port_entry.pack(fill="x", padx=10, pady=10)
+
+        self.lbl_alert = CTkLabel(self.right_frame, text="Усі поля повинні бути заповненими!")
 
         self.connect_button = CTkButton(self.right_frame, text="УВІЙТИ", command=self.open_messenger)
         self.connect_button.pack(fill="x", padx=10, pady=5)
 
     def open_messenger(self):
         self.name = self.name_entry.get()
-        self.destroy()
+        self.host = self.host_entry.get()
+        self.port = self.port_entry.get()
+        if self.name and self.host and self.port:
+            self.destroy()
+        else:
+            self.lbl_alert.pack(fill="x", padx=10, pady=10)
