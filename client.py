@@ -6,15 +6,9 @@ from auth import AuthWindow
 
 set_default_color_theme("theme.json")
 
-auth_win = AuthWindow()
-auth_win.mainloop()
-name = auth_win.name
-host = auth_win.host
-port = auth_win.port
-
 
 class MainWindow(CTk):
-    def __init__(self):
+    def __init__(self, name, host, port):
         super().__init__()
         self.geometry("400x300")
         # main
@@ -78,5 +72,12 @@ class MainWindow(CTk):
                 break
 
 
-main_win = MainWindow()
-main_win.mainloop()
+auth_win = AuthWindow()
+auth_win.mainloop()
+name = auth_win.name
+host = auth_win.host
+port = auth_win.port
+
+if name and host and port:
+    main_win = MainWindow(name, host, port)
+    main_win.mainloop()
